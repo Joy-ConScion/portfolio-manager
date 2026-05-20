@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Portfolio implements Valuable{
 
@@ -15,15 +16,27 @@ public class Portfolio implements Valuable{
     }
 
     public void addAsset(String name, double marketValue){
-        String[] assetFields = line.split("\\|");
-        FixedAsset asset = new FixedAsset()
-        assets.add(asset);
+
 
     }
 
     @Override
     public double getValue() {
-        return 0;
+
+        return assets.stream().mapToDouble(Valuable::getValue).sum();
     }
+
+    public double getMostValuable() {
+        return assets.stream()
+                .mapToDouble(Valuable::getValue)
+                .max()
+                .orElse(0);
+    }
+
+    public double getLeastValuable(){
+        return assets.stream()
+                .mapToDouble(Valuable::getValue)
+                .min()
+                .orElse(0);    }
 
 }
